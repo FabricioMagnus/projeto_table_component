@@ -5,14 +5,6 @@ import TableComponent from "./components/TableComponent";
 
 function App() {
   const [count, setCount] = useState(0);
-  const arrayCabecalho = [
-    "Nome",
-    // "Idade",
-    "Profissão",
-    "Endereço",
-    // "Email",
-    // "Telefone",
-  ];
 
   const arrayListObjects = [
     {
@@ -47,9 +39,35 @@ function App() {
       email: "d@teste.com.br",
       telefone: "8494894984",
     },
+    {
+      id: 4,
+      nome: "Samuel",
+      profissao: "backend",
+      endereço: "rua e",
+      email: "sa@teste.com.br",
+      telefone: "8494894984",
+    },
+    {
+      id: 4,
+      nome: "Davi",
+      profissao: "Frontend",
+      endereço: "rua e",
+      email: "davi@teste.com.br",
+      telefone: "8494894984",
+    },
   ];
 
-  const rowList = ["nome", "profissao", "endereço"];
+  const arrayCabecalho = [
+    "Nome",
+    // "Idade",
+    "Profissão",
+    "Endereço",
+    "Email",
+    "Opções",
+    // "Telefone",
+  ];
+
+  const rowList = ["nome", "profissao", "endereço", "email"];
 
   return (
     <div className="App">
@@ -58,6 +76,7 @@ function App() {
         data={arrayListObjects}
         rowList={rowList}
         loading={false}
+        isOption={true}
       />
     </div>
   );
