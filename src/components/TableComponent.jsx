@@ -24,7 +24,85 @@ export default function TableComponent({
   optionsList,
 }) {
   const Rows = data.map((obj, index) => {
-    const rowCells = rowList.map((key) => <Td key={key}>{obj[key]}</Td>);
+    function CNPJFormater(cnpj) {
+      const CNPJ = cnpj;
+      return CNPJ.replace(/\D/g, "")
+        .replace(/(\d{2})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1/$2")
+        .replace(/(\d{4})(\d)/, "$1-$2")
+        .replace(/(-\d{2})\d+?$/, "$1");
+    }
+
+    function PhoneFormater(number) {
+      const phoneNumber = number;
+      return phoneNumber
+        .replace(/\D/g, "")
+        .replace(/(\d{2})(\d)/, "($1) $2")
+        .replace(/(\d{5})(\d)/, "$1-$2")
+        .replace(/(-\d{4})\d+?$/, "$1");
+    }
+
+    function CaptionFormater(text) {
+      return text
+        .toLowerCase()
+        .replace(/(^\w{1})|(\s+\w{1})/g, (letra) => letra.toUpperCase());
+    }
+
+    function ToLocaleFormat(value) {
+      return value.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+    }
+
+    function CPFFormater(cpf) {
+      const CPF = cpf;
+      return CPF.replace(/\D/g, "")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1-$2")
+        .replace(/(-\d{2})\d+?$/, "$1");
+    }
+
+    const arrayToLocaleFormater = [
+      "valor",
+      "saldo",
+      "value",
+      "credito",
+      "debito",
+    ];
+
+    const arrayToCaptionFormat = [
+      "nome",
+      "sobrenome",
+      "profissao",
+      "razaoSocial",
+      "nomeFantasia",
+      "endereço",
+    ];
+
+    const rowCells = rowList.map((key, index) => {
+      if (key.toLowerCase().includes("telefone")) {
+        return <Td>{PhoneFormater(obj[key])}</Td>;
+      }
+      if (arrayToLocaleFormater.includes(key.toLowerCase())) {
+        return <Td>{ToLocaleFormat(obj[key])}</Td>;
+      }
+      if (arrayToCaptionFormat.includes(key.toLowerCase())) {
+        return <Td>{CaptionFormater(obj[key])}</Td>;
+      }
+      if (
+        key.toLowerCase().includes("cpf") ||
+        key.toLowerCase().includes("cnpj")
+      ) {
+        if (obj[key].length === 11) {
+          return <Td>{CPFFormater(obj[key])}</Td>;
+        }
+        return <Td>{CNPJFormater(obj[key])}</Td>;
+      }
+      return <Td>{obj[key]}</Td>;
+    });
     const options = (
       <Td>
         <Menu>
@@ -65,7 +143,7 @@ export default function TableComponent({
   return (
     <Table variant={"striped"}>
       <Thead>
-        <Tr>{Header_Row}</Tr>
+        <Tr key={1}>{Header_Row}</Tr>
       </Thead>
       <Tbody>{Rows}</Tbody>
     </Table>

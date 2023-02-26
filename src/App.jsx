@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import "./App.css";
 
@@ -15,6 +15,10 @@ function App() {
       endereço: "rua a",
       email: "a@teste.com.br",
       telefone: "4849849894",
+      saldo: 50,
+      valor: 40,
+      cpfDestinatario: "02060411017",
+      cnpjLocador: "27110404000165",
     },
     {
       id: 2,
@@ -23,6 +27,10 @@ function App() {
       endereço: "rua b",
       email: "b@teste.com.br",
       telefone: "8494984984",
+      saldo: 50,
+      valor: 40,
+      cpfDestinatario: "02060411017",
+      cnpjLocador: "27110404000165",
     },
     {
       id: 3,
@@ -31,6 +39,10 @@ function App() {
       endereço: "rua c",
       email: "c@teste.com.br",
       telefone: "84948984984",
+      saldo: 50,
+      valor: 40,
+      cpfDestinatario: "02060411017",
+      cnpjLocador: "27110404000165",
     },
     {
       id: 4,
@@ -39,6 +51,10 @@ function App() {
       endereço: "rua d",
       email: "d@teste.com.br",
       telefone: "8494894984",
+      saldo: 50,
+      valor: 40,
+      cpfDestinatario: "02060411017",
+      cnpjLocador: "27110404000165",
     },
     {
       id: 4,
@@ -47,6 +63,10 @@ function App() {
       endereço: "rua e",
       email: "sa@teste.com.br",
       telefone: "8494894984",
+      saldo: 50,
+      valor: 40,
+      cpfDestinatario: "02060411017",
+      cnpjLocador: "27110404000165",
     },
     {
       id: 4,
@@ -55,6 +75,10 @@ function App() {
       endereço: "rua e",
       email: "davi@teste.com.br",
       telefone: "8494894984",
+      saldo: 50,
+      valor: 40,
+      cpfDestinatario: "02060411017",
+      cnpjLocador: "27110404000165",
     },
   ];
 
@@ -65,6 +89,10 @@ function App() {
     "Endereço",
     "Telefone",
     "Email",
+    "Saldo",
+    "Valor",
+    "CPF do Cliente",
+    "CNPJ da Empresa",
     "Opções",
   ];
 
@@ -83,18 +111,30 @@ function App() {
     },
   ];
 
-  const rowList = ["nome", "profissao", "endereço", "telefone", "email"];
+  const rowList = [
+    "nome",
+    "profissao",
+    "endereço",
+    "telefone",
+    "email",
+    "saldo",
+    "valor",
+    "cpfDestinatario",
+    "cnpjLocador",
+  ];
 
   return (
     <div className="App">
       <ChakraProvider>
-        <TableComponent
-          headerList={arrayCabecalho}
-          data={arrayListObjects}
-          rowList={rowList}
-          loading={false}
-          optionsList={optionList}
-        />
+        <Flex w={"95vw"}>
+          <TableComponent
+            headerList={arrayCabecalho}
+            data={arrayListObjects}
+            rowList={rowList}
+            loading={false}
+            optionsList={optionList}
+          />
+        </Flex>
       </ChakraProvider>
     </div>
   );
