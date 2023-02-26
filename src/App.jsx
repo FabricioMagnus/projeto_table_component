@@ -1,3 +1,4 @@
+import { ChakraProvider } from "@chakra-ui/react";
 import { useState } from "react";
 import "./App.css";
 
@@ -62,22 +63,39 @@ function App() {
     // "Idade",
     "Profissão",
     "Endereço",
+    "Telefone",
     "Email",
     "Opções",
-    // "Telefone",
   ];
 
-  const rowList = ["nome", "profissao", "endereço", "email"];
+  const optionList = [
+    {
+      label: "editar",
+      onClick: (obj) => {
+        console.log("Linha selecionada", obj);
+      },
+    },
+    {
+      label: "excluir",
+      onClick: (obj) => {
+        console.log("Linha para excluir", obj);
+      },
+    },
+  ];
+
+  const rowList = ["nome", "profissao", "endereço", "telefone", "email"];
 
   return (
     <div className="App">
-      <TableComponent
-        headerList={arrayCabecalho}
-        data={arrayListObjects}
-        rowList={rowList}
-        loading={false}
-        isOption={true}
-      />
+      <ChakraProvider>
+        <TableComponent
+          headerList={arrayCabecalho}
+          data={arrayListObjects}
+          rowList={rowList}
+          loading={false}
+          optionsList={optionList}
+        />
+      </ChakraProvider>
     </div>
   );
 }
